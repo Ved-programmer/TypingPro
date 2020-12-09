@@ -4,9 +4,10 @@ import random
 import creators
 import utility
 from win32api import GetSystemMetrics
-
-#Increasing the DPI settings
 import ctypes
+
+
+# Increasing the DPI settings
 awareness = ctypes.c_int()
 errorCode = ctypes.windll.shcore.GetProcessDpiAwareness(0, ctypes.byref(awareness))
 errorCode = ctypes.windll.shcore.SetProcessDpiAwareness(2)
@@ -16,6 +17,8 @@ print("This program was made by Ved Rathi")
 with open("text.txt") as f:
     lines = f.readlines()
 
+
+# this is the place where the height and Widht of the application are ajdusted 
 WIDTH, HEIGHT = GetSystemMetrics(0)//2, GetSystemMetrics(0)//4
 wu = WIDTH / 1000
 hu = HEIGHT / 1000
@@ -24,11 +27,13 @@ screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption("Typing Pro")
 pygame.init()
 
+
 def msgToScreen(screen, msg, positions):
     font = pygame.font.Font(None, int(wu*hu*60))
     text = font.render(msg, True, [0, 0, 0])
     text_rect = text.get_rect(center=positions)
     screen.blit(text, text_rect)
+
 
 #RGB color values
 white = (255, 255, 255)
