@@ -18,7 +18,7 @@ with open("text.txt") as f:
     lines = f.readlines()
 
 
-# this is the place where the height and Widht of the application are ajdusted 
+# this is the place where the height and Width of the application are ajdusted 
 WIDTH, HEIGHT = GetSystemMetrics(0)//2, GetSystemMetrics(0)//4
 wu = WIDTH / 1000
 hu = HEIGHT / 1000
@@ -42,7 +42,6 @@ yellow = [255, 255, 0]
 purple = [125, 25, 200]
 
 screen.fill(green)
-message = "Press enter to start typing"
 pygame.display.update()
 
 gameOn = True
@@ -52,8 +51,14 @@ Could be used in the future:
     x,y = size = screen.get_width(), screen.get_height()
     print(x, y)
 """
-aboutMe = utility.button((0, 0, 255), WIDTH/2 - wu*300, HEIGHT/2 - hu*187, wu*600, hu*375,
+messageRunningButton = utility.button((0, 0, 255), WIDTH/2 - wu*300, hu*100, wu*600, hu*350,
+                        wu, hu, "Start Typing")
+
+aboutMe = utility.button((0, 0, 255), WIDTH/2 - wu*300, hu*550, wu*600, hu*350,
                         wu, hu, "Get to know the creators")
+
+messageRunning = lambda : runMessage.runMessage(screen, random.choice(lines).removesuffix("\n"),
+                                                green, yellow, purple, WIDTH, HEIGHT, wu, hu)
 
 pygame.display.update()
 
@@ -65,24 +70,31 @@ while gameOn:
  
         elif e.type == pygame.KEYDOWN:
             if e.key == pygame.K_RETURN:
-                gotWrong = runMessage.runMessage(screen, random.choice(lines).removesuffix("\n"),
-                                                green, yellow, purple, WIDTH, HEIGHT, wu, hu)
+                gotWrong = messageRunning()
                 if gotWrong == None:gameOn = False
-                message = "Press enter to type again."
+                
 
         elif e.type == pygame.MOUSEBUTTONDOWN:
             if aboutMe.isOver(pos):
                 if creators.showCreators(screen, WIDTH, HEIGHT, wu, hu) == pygame.QUIT:
                     gameOn = False
+            
+            if messageRunningButton.isOver(pos):
+                gotWrong = messageRunning()
+                if gotWrong == None:gameOn = False
+
         
         if aboutMe.isOver(pos):aboutMe.color = (255, 0, 0)
         else:aboutMe.color = (0, 0, 255)
+
+        if messageRunningButton.isOver(pos):messageRunningButton.color = (255, 0, 0)
+        else:messageRunningButton.color = (0, 0, 255)
 
     
     screen.fill(green)
     
     aboutMe.draw(screen)
-    msgToScreen(screen, message, [WIDTH/2, hu*200])
+    messageRunningButton.draw(screen)
     pygame.display.update()
         
 pygame.quit()
