@@ -1,5 +1,9 @@
 import pygame
+
+
 class button():
+
+
     def __init__(self, color, x,y,width,height, wu, hu, text = "", font = 60):
         self.color = color
         self.x = x
@@ -11,6 +15,7 @@ class button():
         self.hu = hu
         self.font = font
 
+
     def draw(self,win):
         #Call this method to draw the button on the screen
 
@@ -21,6 +26,7 @@ class button():
             text = font.render(self.text, 1, (0,255,0))
             win.blit(text, (self.x + (self.width/2 - text.get_width()/2), self.y + 
                     (self.height/2 - text.get_height()/2)))
+
 
     def isOver(self, pos):
         #Pos is the mouse position or a tuple of (x,y) coordinates

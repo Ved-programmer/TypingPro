@@ -2,9 +2,11 @@ import pygame
 import utility
 import webbrowser
 
+
 def changeButtonColor(button, pos):
     if button.isOver(pos):button.color = (255, 0, 0)
     else:button.color = (0, 0, 255)
+
 
 def showCreators(screen, WIDTH, HEIGHT, wu, hu):
     onThisScreen = True
@@ -67,10 +69,3 @@ if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode((800, 600))
     showCreators(screen)
-        
-
-
-
-
-
-

@@ -3,11 +3,13 @@ import pygame.freetype
 import time
 import random
 
+
 class line:
     def __init__(self, data, hu):
         self.data = data
         self.currentLetter = 0
         self.y = hu*300
+
 
 def splitScreenMsg(msg, hu):
     cur = []
@@ -21,11 +23,13 @@ def splitScreenMsg(msg, hu):
     if cur != []:strings.append(line(" ".join(cur), hu))
     return strings
 
+
 def otherStuff(screen, WIDTH, HEIGHT, wu, hu):
     font = pygame.font.SysFont(None, int(wu*hu*50))
     text = font.render("Type Type Type!", True, (0, 0, 0))
     text_rect = text.get_rect(center=(WIDTH/2, HEIGHT*2/3))
     screen.blit(text, text_rect)
+
 
 def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundText, 
                 foregroundText, WIDTH, HEIGHT, wu, hu):
