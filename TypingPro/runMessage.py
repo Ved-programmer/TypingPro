@@ -24,21 +24,29 @@ def splitScreenMsg(msg, hu):
     return strings
 
 
-def otherStuff(screen, WIDTH, HEIGHT, wu, hu):
-    font = pygame.font.SysFont(None, int(wu*hu*50))
-    text = font.render("Type Type Type!", True, (0, 0, 0))
-    text_rect = text.get_rect(center=(WIDTH/2, HEIGHT*2/3))
-    screen.blit(text, text_rect)
+def otherStuff(screen, WIDTH, HEIGHT, wu, hu, wpm, accuracy):
+    font = pygame.font.SysFont(None, 150)
+    text1 = font.render(f"accuracy: {accuracy}", True, (0, 0, 255))
+    text2 = font.render(f"wpm: {wpm}", True, (0, 0, 255))
+    text_rect1 = text1.get_rect(center=(WIDTH/2, HEIGHT/2-75*hu))
+    text_rect2 = text2.get_rect(center=(WIDTH/2, HEIGHT/2+75*hu))
+    screen.blit(text1, text_rect1)
+    screen.blit(text2, text_rect2)
 
+
+
+def calculateDetails(start, gotWrong, length):
+    timeTaken = (time.time() - start) / 60
+    words = length / 5
+    wpm = words // timeTaken
+    accuracy = 100 - round(gotWrong / length, 2)
+    return [wpm, accuracy]
 
 def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundText, 
                 foregroundText, WIDTH, HEIGHT, wu, hu):
     screen.fill(backgroundScreen)
 
-    timeTaken = (time.time() - start) / 60
-    words = length / 5
-    wpm = words // timeTaken
-    accuracy = 100 - round(gotWrong / length, 2)
+    wpm, accuracy = calculateDetails(start, gotWrong, length)
 
     font = pygame.font.SysFont(None, int(wu*hu*60))
     text1 = font.render(f"Your avergage WPM is {wpm}", True, (0, 0, 0))
@@ -92,10 +100,17 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
   
     metrics = font.get_metrics(currentLine.data)
     gotWrong = 0
-    start = False
+    length = 0
+    start = 0
+    wpm, accuracy = calculateDetails(start, gotWrong, 1)
+    cur = 0
 
     while True:
+        if time.time() - cur > 1 and length > 0:
+            wpm, accuracy = calculateDetails(start, gotWrong, length)
+            cur = time.time()
         events = pygame.event.get()
+
         for e in events:
             if e.type == pygame.QUIT:
                 return
@@ -104,10 +119,11 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
                 if e.unicode == currentLine.data[currentLine.currentLetter]:
                     colour = foregroundText
                     currentLine.currentLetter += 1
+                    length += 1
                     if currentLine.currentLetter >= len(currentLine.data):
                         currentLineIdx += 1
                         if currentLineIdx >= len(lines):return showResults(screen, start, 
-                                                                        gotWrong, len(dataToShow), 
+                                                                        gotWrong, length, 
                         backgroundScreen, backgroundText, foregroundText, WIDTH, HEIGHT, wu, hu)
                         currentLine = lines[currentLineIdx]
                         text_surf_rect = font.get_rect(currentLine.data)
@@ -127,7 +143,7 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
                                
         screen.fill(backgroundScreen)
         text_surf.fill(backgroundText)
-        otherStuff(screen, WIDTH, HEIGHT, wu, hu)
+        otherStuff(screen, WIDTH, HEIGHT, wu, hu, wpm, accuracy)
         x = 0
        
         for (idx, (letter, metric)) in enumerate(zip(currentLine.data, metrics)):
