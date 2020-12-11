@@ -18,7 +18,7 @@ with open("text.txt") as f:
     lines = f.readlines()
 
 
-# this is the place where the height and Width of the application are ajdusted 
+# this is the place where the height and width of the application are ajdusted 
 WIDTH, HEIGHT = GetSystemMetrics(0)//2, GetSystemMetrics(0)//4
 wu = WIDTH / 1000
 hu = HEIGHT / 1000
@@ -62,12 +62,13 @@ messageRunning = lambda : runMessage.runMessage(screen, random.choice(lines).rem
 
 pygame.display.update()
 
+buttons = [aboutMe, messageRunningButton]
+
 while gameOn:
     for e in pygame.event.get():
         pos = pygame.mouse.get_pos()
         if e.type == pygame.QUIT:
             gameOn = False
- 
         elif e.type == pygame.KEYDOWN:
             if e.key == pygame.K_RETURN:
                 gotWrong = messageRunning()
@@ -83,18 +84,11 @@ while gameOn:
                 gotWrong = messageRunning()
                 if gotWrong == None:gameOn = False
 
-        
-        if aboutMe.isOver(pos):aboutMe.color = (255, 0, 0)
-        else:aboutMe.color = (0, 0, 255)
-
-        if messageRunningButton.isOver(pos):messageRunningButton.color = (255, 0, 0)
-        else:messageRunningButton.color = (0, 0, 255)
-
+        utility.changeButtonColor(buttons, pos)
     
     screen.fill(green)
     
-    aboutMe.draw(screen)
-    messageRunningButton.draw(screen)
+    utility.drawButtons(buttons, screen)
     pygame.display.update()
         
 pygame.quit()
