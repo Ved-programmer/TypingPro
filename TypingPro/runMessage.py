@@ -2,7 +2,7 @@ import pygame
 import pygame.freetype
 import time
 import random
-
+import utility
 
 class line:
     def __init__(self, data, hu):
@@ -46,6 +46,7 @@ def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundTex
                 foregroundText, WIDTH, HEIGHT, wu, hu):
     screen.fill(backgroundScreen)
 
+
     wpm, accuracy = calculateDetails(start, gotWrong, length)
 
     font = pygame.font.SysFont(None, int(wu*hu*60))
@@ -53,17 +54,22 @@ def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundTex
     text2 = font.render(f"Your avergage accuracy is {accuracy}%", True, (0, 0, 0))
     text_rect1 = text1.get_rect(center=(WIDTH/2, HEIGHT/4))
     text_rect2 = text2.get_rect(center=(WIDTH/2, HEIGHT/3))
-    screen.blit(text1, text_rect1)
-    screen.blit(text2, text_rect2)
+    
 
-    text = font.render("Press b to go back and enter to run again.", True, (0, 0, 0))
-    text_rect = text.get_rect(center=(WIDTH/2, HEIGHT/2))
-    screen.blit(text, text_rect)
+    backButton = utility.button((0, 0, 255), wu*100, HEIGHT/2, wu*300, 
+                                hu*100, wu, hu, "Go Back", 40)
+
+    runAgainButton = utility.button((0, 0, 255), wu*600, HEIGHT/2, wu*300, 
+                                hu*100, wu, hu, "Run Again", 40)
+
+    buttons = [backButton, runAgainButton]
 
     pygame.display.update()
 
     while True:
         for i in pygame.event.get():
+            pos = pygame.mouse.get_pos()
+            utility.changeButtonColor(buttons, pos)
             if i.type == pygame.QUIT:
                 return
             if i.type == pygame.KEYDOWN:
@@ -74,6 +80,23 @@ def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundTex
                         lines = f.readlines()
                     return runMessage(screen, random.choice(lines).removesuffix("\n"),
                     backgroundScreen, backgroundText, foregroundText, WIDTH, HEIGHT, wu, hu)
+
+            elif i.type == pygame.MOUSEBUTTONDOWN:
+
+                if backButton.isOver(pos):
+                    return gotWrong
+            
+                if runAgainButton.isOver(pos):
+                    with open("text.txt") as f:
+                        lines = f.readlines()
+                    return runMessage(screen, random.choice(lines).removesuffix("\n"),
+                    backgroundScreen, backgroundText, foregroundText, WIDTH, HEIGHT, wu, hu)
+                
+            
+        screen.fill(backgroundScreen)
+        utility.drawButtons(buttons, screen)
+        screen.blit(text1, text_rect1);screen.blit(text2, text_rect2)
+        pygame.display.update()
 
 
 def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundText, 
