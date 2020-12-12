@@ -3,11 +3,6 @@ import utility
 import webbrowser
 
 
-def changeButtonColor(button, pos):
-    if button.isOver(pos):button.color = (255, 0, 0)
-    else:button.color = (0, 0, 255)
-
-
 def showCreators(screen, WIDTH, HEIGHT, wu, hu):
     onThisScreen = True
     screen.fill([0, 0, 0])
@@ -30,17 +25,16 @@ def showCreators(screen, WIDTH, HEIGHT, wu, hu):
 
     navdeepGithubButton = utility.button((0, 0, 255), wu*690, HEIGHT/2 + hu*250, wu*300, 
                                 hu*100, wu, hu, "Navdeep's Github", 40)
+        
+    buttons = [backButton, repositoryButton, vedGithubButton, navdeepGithubButton]
 
-    backButton.draw(screen)
+    utility.drawButtons(buttons, screen)
     pygame.display.update()
 
     while onThisScreen:
         for e in pygame.event.get():
             pos = pygame.mouse.get_pos()
-            changeButtonColor(backButton, pos)
-            changeButtonColor(repositoryButton, pos)
-            changeButtonColor(vedGithubButton, pos)
-            changeButtonColor(navdeepGithubButton, pos)
+            utility.changeButtonColor(buttons, pos)
             
             if e.type == pygame.QUIT:
                 return pygame.QUIT
@@ -59,13 +53,6 @@ def showCreators(screen, WIDTH, HEIGHT, wu, hu):
                     webbrowser.open("https://github.com/smartnavdeep")
 
 
-        backButton.draw(screen)
-        repositoryButton.draw(screen)
-        navdeepGithubButton.draw(screen)
-        vedGithubButton.draw(screen)
+        utility.drawButtons(buttons, screen)
         pygame.display.update()
 
-if __name__ == "__main__":
-    pygame.init()
-    screen = pygame.display.set_mode((800, 600))
-    showCreators(screen)
