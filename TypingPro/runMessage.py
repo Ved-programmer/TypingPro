@@ -128,6 +128,9 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
     wpm, accuracy = calculateDetails(start, gotWrong, 1)
     cur = 0
 
+    backButton = utility.button((0, 0, 255), WIDTH/2-200*wu, HEIGHT/2 + 200*hu, wu*400, 
+                                hu*200, wu, hu, "Go Back", 40)
+
     while True:
         if time.time() - cur > 1 and length > 0:
             wpm, accuracy = calculateDetails(start, gotWrong, length)
@@ -135,6 +138,8 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
         events = pygame.event.get()
 
         for e in events:
+            pos = pygame.mouse.get_pos()
+            utility.changeButtonColor([backButton], pos)
             if e.type == pygame.QUIT:
                 return
             if e.type == pygame.KEYDOWN:
@@ -163,6 +168,10 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
                     #print(e.unicode, gotWrong)
                     colour = 'red'
                     gotWrong += 1
+                
+            elif e.type == pygame.MOUSEBUTTONDOWN:
+                if backButton.isOver(pos):
+                    return gotWrong
                                
         screen.fill(backgroundScreen)
         text_surf.fill(backgroundText)
@@ -178,7 +187,9 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
             x += metric[M_ADV_X]
           
         screen.blit(text_surf, text_surf_rect)
+        utility.drawButtons([backButton], screen)
         pygame.display.flip()
+    
     screen.fill(backgroundScreen)
     pygame.display.flip()
 
