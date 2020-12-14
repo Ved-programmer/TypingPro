@@ -3,6 +3,7 @@ import pygame.freetype
 import time
 import random
 import utility
+import texts
 
 class line:
     def __init__(self, data, hu):
@@ -76,9 +77,7 @@ def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundTex
                 if i.unicode == "b":
                     return gotWrong
                 if i.key == pygame.K_RETURN:
-                    with open("text.txt") as f:
-                        lines = f.readlines()
-                    return runMessage(screen, random.choice(lines).removesuffix("\n"),
+                    return runMessage(screen, texts.getText(),
                     backgroundScreen, backgroundText, foregroundText, WIDTH, HEIGHT, wu, hu)
 
             elif i.type == pygame.MOUSEBUTTONDOWN:
@@ -87,9 +86,7 @@ def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundTex
                     return gotWrong
             
                 if runAgainButton.isOver(pos):
-                    with open("text.txt") as f:
-                        lines = f.readlines()
-                    return runMessage(screen, random.choice(lines).removesuffix("\n"),
+                    return runMessage(screen, texts.getText(),
                     backgroundScreen, backgroundText, foregroundText, WIDTH, HEIGHT, wu, hu)
                 
             
