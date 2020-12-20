@@ -1,8 +1,6 @@
 # Typing Pro
 Made With Pygame and Python
 
-```Type, Type, Type!```
-
 ## Technical Details
 
 **Files list and description** : 
