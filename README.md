@@ -12,6 +12,8 @@ Made With Pygame and Python
 
 - utility.py - repetetive code needed by files to execute the program
 
+- texts.py - contains information about the texts displayed for typing.
+
 ---
 
 # What is this ?
