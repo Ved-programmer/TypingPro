@@ -17,10 +17,10 @@ def splitScreenMsg(msg, hu):
     strings = []
     words = msg.split(" ")
     for i in words:
-        cur.append(i)
-        if len(" ".join(cur)) >= 30:
+        if len(" ".join(cur)) + len(i) >= 35:
             strings.append(line(" ".join(cur), hu))
             cur = []
+        cur.append(i)
     if cur != []:strings.append(line(" ".join(cur), hu))
     return strings
 
@@ -112,10 +112,10 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
     text_surf_rect = font.get_rect(currentLine.data)
     
     baseline = text_surf_rect.y + hu*20
+    
     text_surf = pygame.Surface((text_surf_rect.size[0] + wu*30, text_surf_rect[1] + hu*80))
     text_surf_rect.center = screen.get_rect().center
     text_surf_rect.y -= currentLine.y
-    text_surf_rect.h += currentLine.y
     colour = foregroundText
   
     metrics = font.get_metrics(currentLine.data)
@@ -157,7 +157,6 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
                                                     text_surf_rect[1] + hu*80))
                         text_surf_rect.center = screen.get_rect().center
                         text_surf_rect.y -= currentLine.y
-                        text_surf_rect.h += currentLine.y
                         colour = foregroundText
                         metrics = font.get_metrics(currentLine.data)
 
