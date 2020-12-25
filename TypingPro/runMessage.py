@@ -1,7 +1,6 @@
 import pygame
 import pygame.freetype
 import time
-import random
 import utility
 import texts
 
@@ -129,7 +128,7 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
                                 hu*200, wu, hu, "Go Back", 40)
 
     while True:
-        if time.time() - cur > 1 and length > 0:
+        if time.time() - cur > 1.5 and length > 1:
             wpm, accuracy = calculateDetails(start, gotWrong, length)
             cur = time.time()
         events = pygame.event.get()
@@ -140,8 +139,8 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
             if e.type == pygame.QUIT:
                 return
             if e.type == pygame.KEYDOWN:
-                if not start:start = time.time()
                 if e.unicode == currentLine.data[currentLine.currentLetter]:
+                    if not start:start = time.time()
                     colour = foregroundText
                     currentLine.currentLetter += 1
                     length += 1
@@ -162,6 +161,7 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
 
                 elif len(e.unicode) == 1:
                     #print(e.unicode, gotWrong)
+                    if not start:start = time.time()
                     colour = 'red'
                     gotWrong += 1
                 
@@ -188,24 +188,3 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
     
     screen.fill(backgroundScreen)
     pygame.display.flip()
-
-    
-
-
-if __name__ == '__main__':
-    """
-    pygame.init()
-    screen = pygame.display.set_mode((800, 400))
-    green = [0, 255, 0]
-    yellow = [255, 255, 0]
-    purple = [125, 25, 200]
-
-    screen.fill(green)
-    pygame.display.update()
-    with open("text.txt") as f:
-        val = f.readlines()[0].removesuffix("\n")
-        #print(val)
-        returnVal = runMessage(screen, val, green, yellow, purple)
-    print(returnVal)
-
-    """
