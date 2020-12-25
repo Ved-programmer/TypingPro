@@ -1,6 +1,5 @@
 import pygame
 import runMessage
-import random
 import creators
 import utility
 from win32api import GetSystemMetrics
@@ -12,8 +11,6 @@ import texts
 awareness = ctypes.c_int()
 errorCode = ctypes.windll.shcore.GetProcessDpiAwareness(0, ctypes.byref(awareness))
 errorCode = ctypes.windll.shcore.SetProcessDpiAwareness(2)
-
-print("This program was made by Ved Rathi")
 
 # this is the place where the height and width of the application are ajdusted
 WIDTH, HEIGHT = GetSystemMetrics(0)//2, GetSystemMetrics(0)//4
@@ -42,12 +39,6 @@ screen.fill(green)
 pygame.display.update()
 
 gameOn = True
-
-"""
-Could be used in the future:
-    x,y = size = screen.get_width(), screen.get_height()
-    print(x, y)
-"""
 messageRunningButton = utility.button((0, 0, 255), WIDTH/2 - wu*300, hu*100, wu*600, hu*350,
                         wu, hu, "Start Typing")
 
