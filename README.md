@@ -18,11 +18,11 @@ Made With Pygame and Python
 
 # What is this ?
 
-Typing Pro is a GUI application made with Python and Pygame. Made to improve your typing skills. This shows you relevant information like wpm, accuracy etc. That you can use to improve your typing speed. This can also be treated as a typing test.
+Typing Pro is a GUI application made with Python and Pygame. Made to improve your typing skills. This shows you relevant information like wpm, accuracy etc. That you can use to improve your typing speed. This can also be treated as a typing test. 
 
 # Current Status :
 
-In development, not in condition to use
+Minor Big Fixes, in condition to use
 
 
 # Can I contribute ?
