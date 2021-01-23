@@ -80,3 +80,10 @@ while gameOn:
     pygame.display.update()
         
 pygame.quit()
+# End
+# <-- LICENCE info -->
+'''
+TypingPro
+Copyright Ved Rathi
+Licensed under MIT (https://github.com/Ved-Programmer/TypingPro/blob/master/LICENSE)
+'''
