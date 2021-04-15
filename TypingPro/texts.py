@@ -15,7 +15,7 @@ texts = ["""Lawrence Edward Page is an American computer scientist and Internet 
 """Steven Paul Jobs was an American business magnate, industrial designer, investor, and media proprietor. He was the chairman, chief executive officer (CEO), and co-founder of Apple Inc.""",
 """Google, LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, a search engine, cloud computing, software, and hardware.""",
 """Microsoft Corporation is an American multinational technology company with headquarters in Redmond, Washington. It develops, manufactures, licenses, supports, and sells computer software, consumer electronics, personal computers etc""",
-"""Shwetank Srivastav is an ICT teacher is India, Rajasthan, Jaipur, he has skills like Python, Java, HTML/CSS, Word/Excel/Docs/Sheets, photoshop, flash, movie maker and audacity etc. He is a wonderful and fantastic teacher"""
+"""Shwetank Srivastav is an ICT teacher in India, Rajasthan, Jaipur, he has skills like Python, Java, HTML/CSS, Word/Excel/Docs/Sheets, photoshop, flash, movie maker and audacity etc. He is a wonderful and fantastic teacher"""
 ]
 from random import choice
 
