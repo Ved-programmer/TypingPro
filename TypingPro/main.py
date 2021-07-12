@@ -12,7 +12,7 @@ awareness = ctypes.c_int()
 errorCode = ctypes.windll.shcore.GetProcessDpiAwareness(0, ctypes.byref(awareness))
 errorCode = ctypes.windll.shcore.SetProcessDpiAwareness(2)
 
-# this is the place where the height and width of the application are ajdusted
+# this is the place where the height and width of the application are adjusted
 WIDTH, HEIGHT = GetSystemMetrics(0)//2, GetSystemMetrics(0)//4
 wu = WIDTH / 1000
 hu = HEIGHT / 1000
@@ -80,10 +80,11 @@ while gameOn:
     pygame.display.update()
         
 pygame.quit()
-# End
+
 # <-- LICENCE info -->
 '''
 TypingPro
 Copyright Ved Rathi
 Licensed under MIT (https://github.com/Ved-Programmer/TypingPro/blob/master/LICENSE)
 '''
+
