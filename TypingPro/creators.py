@@ -50,7 +50,7 @@ def showCreators(screen, WIDTH, HEIGHT, wu, hu):
                     webbrowser.open("https://github.com/Ved-programmer")
 
                 elif navdeepGithubButton.isOver(pos):
-                    webbrowser.open("https://github.com/smartnavdeep")
+                    webbrowser.open("https://github.com/crypto-navdeep")
 
 
         utility.drawButtons(buttons, screen)
