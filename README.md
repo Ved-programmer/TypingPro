@@ -21,5 +21,3 @@ Typing Pro is a GUI application made with Python and Pygame. Made to improve you
 - utility.py - repetetive code needed by files to execute the program
 
 - texts.py - contains information about the texts displayed for typing.
-
-*-Thank you* 
