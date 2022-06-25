@@ -2,32 +2,20 @@ import pygame
 import runMessage
 import creators
 import utility
-from win32api import GetSystemMetrics
-import ctypes
 import texts
 
 
-# Increasing the DPI settings
-awareness = ctypes.c_int()
-errorCode = ctypes.windll.shcore.GetProcessDpiAwareness(0, ctypes.byref(awareness))
-errorCode = ctypes.windll.shcore.SetProcessDpiAwareness(2)
+pygame.init()
+screen_info = pygame.display.Info()
 
-# this is the place where the height and width of the application are adjusted
-WIDTH, HEIGHT = GetSystemMetrics(0)//2, GetSystemMetrics(0)//4
+WIDTH, HEIGHT = screen_info.current_w//2, screen_info.current_h//2
+
+# WIDTH, HEIGHT = 1000, 800
 wu = WIDTH / 1000
 hu = HEIGHT / 1000
 
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption("Typing Pro")
-pygame.init()
-
-
-def msgToScreen(screen, msg, positions):
-    font = pygame.font.Font(None, int(wu*hu*60))
-    text = font.render(msg, True, [0, 0, 0])
-    text_rect = text.get_rect(center=positions)
-    screen.blit(text, text_rect)
-
 
 #RGB color values
 white = (255, 255, 255)

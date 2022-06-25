@@ -6,7 +6,7 @@ import webbrowser
 def showCreators(screen, WIDTH, HEIGHT, wu, hu):
     onThisScreen = True
     screen.fill([0, 0, 0])
-    font = pygame.font.Font(None, int(wu*hu*55))
+    font = pygame.font.Font(None, 35)
     text1 = font.render("This game was made by Ved Rathi in 2020", True, [255, 255, 255])
     text2 = font.render("assisted by Navdeep Kante", True, [255, 255, 255])
     text_rect1 = text1.get_rect(center = [WIDTH/2, HEIGHT/8])
@@ -18,13 +18,13 @@ def showCreators(screen, WIDTH, HEIGHT, wu, hu):
                                 hu*375, wu, hu, "Go Back")
 
     repositoryButton = utility.button((0, 0, 255), WIDTH/2 - wu*150, HEIGHT/2 + hu*250, wu*300, 
-                                hu*100, wu, hu, "view on Github", 40)
+                                hu*100, wu, hu, "view on Github", 30)
 
     vedGithubButton = utility.button((0, 0, 255), wu*10, HEIGHT/2 + hu*250, wu*300, 
-                                hu*100, wu, hu, "Ved's Github", 40)
+                                hu*100, wu, hu, "Ved's Github", 30)
 
     navdeepGithubButton = utility.button((0, 0, 255), wu*690, HEIGHT/2 + hu*250, wu*300, 
-                                hu*100, wu, hu, "Navdeep's Github", 40)
+                                hu*100, wu, hu, "Navdeep's Github", 30)
         
     buttons = [backButton, repositoryButton, vedGithubButton, navdeepGithubButton]
 

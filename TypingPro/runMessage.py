@@ -3,7 +3,6 @@ import pygame.freetype
 import time
 import utility
 import texts
-
 class line:
     def __init__(self, data, hu):
         self.data = data
@@ -25,7 +24,7 @@ def splitScreenMsg(msg, hu):
 
 
 def otherStuff(screen, WIDTH, HEIGHT, wu, hu, wpm, accuracy):
-    font = pygame.font.SysFont(None, 150)
+    font = pygame.font.SysFont(None, 70)
     text1 = font.render(f"accuracy: {accuracy}", True, (0, 0, 255))
     text2 = font.render(f"wpm: {wpm}", True, (0, 0, 255))
     text_rect1 = text1.get_rect(center=(WIDTH/2, HEIGHT/2-75*hu))
@@ -49,7 +48,7 @@ def showResults(screen, start, gotWrong, length, backgroundScreen, backgroundTex
 
     wpm, accuracy = calculateDetails(start, gotWrong, length)
 
-    font = pygame.font.SysFont(None, int(wu*hu*60))
+    font = pygame.font.SysFont(None, 50)
     text1 = font.render(f"Your avergage WPM is {wpm}", True, (0, 0, 0))
     text2 = font.render(f"Your avergage accuracy is {accuracy}%", True, (0, 0, 0))
     text_rect1 = text1.get_rect(center=(WIDTH/2, HEIGHT/4))
@@ -103,9 +102,8 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
     currentLineIdx = 0
     currentLine = lines[currentLineIdx]
     
-    font = pygame.freetype.Font(None, int(wu*hu*50))
+    font = pygame.freetype.Font(None, 35)
     font.origin = True
-    #font_height = font.get_sized_height()
 
     M_ADV_X = 4
     text_surf_rect = font.get_rect(currentLine.data)
@@ -185,6 +183,3 @@ def runMessage(screen, dataToShow, backgroundScreen, backgroundText, foregroundT
         screen.blit(text_surf, text_surf_rect)
         utility.drawButtons([backButton], screen)
         pygame.display.flip()
-    
-    screen.fill(backgroundScreen)
-    pygame.display.flip()
